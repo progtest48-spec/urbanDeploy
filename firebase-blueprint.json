@@ -1,0 +1,48 @@
+{
+  "entities": {
+    "Listing": {
+      "title": "Listing",
+      "description": "A car or building listed for rent or sale.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique ID of the listing." },
+        "title": { "type": "string", "description": "Title of the listing." },
+        "type": { "type": "string", "enum": ["car", "building"], "description": "Type of listing." },
+        "category": { "type": "string", "enum": ["rent", "buy"], "description": "Transaction category." },
+        "price": { "type": "number", "description": "Price of the listing." },
+        "location": { "type": "string", "description": "Location of the listing." },
+        "image": { "type": "string", "description": "URL of the listing image." },
+        "description": { "type": "string", "description": "Full description of the listing." },
+        "features": { "type": "array", "items": { "type": "string" }, "description": "List of features." },
+        "specs": { "type": "object", "description": "Key-value specifications." },
+        "authorId": { "type": "string", "description": "UID of the user who created the listing." },
+        "authorName": { "type": "string", "description": "Name of the user who created the listing." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when the listing was created." }
+      },
+      "required": ["title", "type", "category", "price", "location", "authorId"]
+    },
+    "User": {
+      "title": "User",
+      "description": "User profile information.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique ID of the user." },
+        "displayName": { "type": "string", "description": "Display name of the user." },
+        "email": { "type": "string", "description": "Email address of the user." },
+        "photoURL": { "type": "string", "description": "URL of the user's profile photo." },
+        "role": { "type": "string", "enum": ["user", "admin"], "description": "User role." }
+      },
+      "required": ["uid", "email"]
+    }
+  },
+  "firestore": {
+    "/listings/{listingId}": {
+      "schema": "Listing",
+      "description": "Collection of all property and vehicle listings."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents."
+    }
+  }
+}
